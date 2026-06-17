@@ -209,3 +209,4 @@ __marimo__/
 # Modules
 node_modules/
 dist/
+.env
