@@ -6,6 +6,7 @@ import rateLimit from "express-rate-limit";
 import mongoSanitize from "express-mongo-sanitize";
 import hpp from "hpp";
 import errorMiddleware from './middlewares/error.middleware.js'
+import serviceRoutes from "./routes/serviceRequest.routes.js";
 
 const app = express();
 
@@ -49,6 +50,7 @@ app.use(express.json({ limit: "10kb" }));
 app.use(mongoSanitize());
 app.use(hpp());
 app.use(compression());
+app.use(limiter);
 
 app.get("/api/v1", (req, res) => {
     res.status(200).json({
@@ -56,6 +58,8 @@ app.get("/api/v1", (req, res) => {
         message: "GarageSolutions API v1"
     });
 });
+
+app.use("/api/v1/service-request", serviceRoutes);
 
 app.use((req, res) => {
     res.status(404).json({
