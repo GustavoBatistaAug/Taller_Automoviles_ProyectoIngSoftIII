@@ -29,14 +29,14 @@ export function createService(service) {
     return service;
 }
 
-export function updateService(service, id){
-    const updatedData = getServiceById(id);
+export function updateService(id, updatedData){
+    const service = getServiceById(id);
     if (!service) return undefined;
     Object.assign(service, updatedData);
     return service;
 }
 
-export function deleteService(){
+export function deleteService(id){
     const index = serviceRequests.findIndex(service => service.id === id);
     if(index === -1)
         return undefined;
