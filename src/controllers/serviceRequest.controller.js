@@ -2,14 +2,14 @@ import { findAllServices, findServiceById, createService, updateService, deleteS
 import { success, error } from "../utils/apiResponse.js";
 import { createServiceRequestSchema } from "../validators/serviceRequest.validator.js";
 
-export function getServices(req, res) {
-    const services = findAllServices();
+export async function getServices(req, res) {
+    const services = await findAllServices();
     return success(res, 200, "Servicios obtenidos correctamente.", services);
 }
 
-export function getService(req, res) {
+export async function getService(req, res) {
     const { id } = req.params;
-    const service = findServiceById(id);
+    const service = await findServiceById(id);
     
     if (!service) {
         return error(res, 404, "Servicio no encontrado.");
@@ -17,19 +17,19 @@ export function getService(req, res) {
     return success(res, 200, "Servicio encontrado.", service);
 }
 
-export function setService(req, res) {
+export async function setService(req, res) {
     const validation = createServiceRequestSchema.safeParse(req.body);
     if (!validation.success) {
         const errorMessages = validation.error.errors.map(err => `${err.path.join('.')}: ${err.message}`).join(', ');
         return error(res, 400, `Errores de validación: ${errorMessages}`);
     }
-    const service = createService(req.body);
+    const service = await createService(req.body);
     return success(res, 201, "Servicio creado correctamente.", service);
 }
 
-export function editService(req, res) {
+export async function editService(req, res) {
     const { id } = req.params;
-    const service = updateService(id, req.body);
+    const service = await updateService(id, req.body);
     
     if (!service) {
         return error(res, 404, "Servicio no encontrado. ")
@@ -37,9 +37,9 @@ export function editService(req, res) {
     return success(res, 200, "Servicio actualizado correctamente.", service);
 }
 
-export function removeService(req, res) {
+export async function removeService(req, res) {
     const { id } = req.params;
-    const service = deleteService(id);
+    const service = await deleteService(id);
     if (!service) {
         return error(res, 404, "Servicio no encontrado.");
     }
