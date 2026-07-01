@@ -7,6 +7,7 @@ import mongoSanitize from "express-mongo-sanitize";
 import hpp from "hpp";
 import errorMiddleware from './middlewares/error.middleware.js'
 import serviceRoutes from "./routes/serviceRequest.routes.js";
+import authRoutes from "./routes/auth.routes.js";
 
 const app = express();
 
@@ -59,7 +60,9 @@ app.get("/api/v1", (req, res) => {
     });
 });
 
+app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/service-request", serviceRoutes);
+app.use(errorMiddleware);
 
 app.use((req, res) => {
     res.status(404).json({
@@ -67,7 +70,5 @@ app.use((req, res) => {
         message: "Recurso no encontrado."
     });
 });
-
-app.use(errorMiddleware);
 
 export default app;
