@@ -1,31 +1,9 @@
-import {
-    registerUser,
-    loginUser,
-    getProfile
-} from "../services/auth.services.js";
-import {
-    registerUserSchema,
-    loginSchema
-} from "../validators/auth.validator.js";
+import { registerUser, loginUser, getProfile } from "../services/auth.services.js";
 import { success, error } from "../utils/apiResponse.js";
 
 export async function register(req, res) {
     try {
-        const validation = registerUserSchema.safeParse(req.body);
-        if (!validation.success) {
-            const errors = validation.error.issues.map(issue => ({
-                field: issue.path.join("."),
-                message: issue.message
-            }));
-            return error(
-                res,
-                400,
-                "Error de validación.",
-                errors
-            );
-        }
-
-        const user = await registerUser(validation.data);
+        const user = await registerUser(req.body);
         return success(
             res,
             201,
@@ -43,22 +21,7 @@ export async function register(req, res) {
 
 export async function login(req, res) {
     try {
-        const validation = loginSchema.safeParse(req.body);
-        if (!validation.success) {
-            const errors = validation.error.issues.map(issue => ({
-                field: issue.path.join("."),
-                message: issue.message
-            }));
-
-            return error(
-                res,
-                400,
-                "Error de validación.",
-                errors
-            );
-        }
-
-        const { email, password } = validation.data;
+        const { email, password } = req.body;
         const response = await loginUser(
             email,
             password
