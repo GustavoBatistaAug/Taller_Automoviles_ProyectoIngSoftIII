@@ -9,7 +9,7 @@ import {
     editPart,
     removePart
 } from "../services/parts.services.js";
-
+import { addStock, removeStock } from "../services/inventory.services.js";
 import { success, error } from "../utils/apiResponse.js";
 
 export async function getParts(req, res) {
@@ -165,5 +165,49 @@ export async function deletePart(req, res) {
         );
     } catch (err) {
         return error(res, 500, err.message);
+    }
+}
+
+export async function stockIn(req, res) {
+    try {
+        const { quantity } = req.body;
+        const part = await addStock(
+            req.params.id,
+            quantity
+        );
+        return success(
+            res,
+            200,
+            "Inventario actualizado.",
+            part
+        );
+    } catch (err) {
+        return error(
+            res,
+            400,
+            err.message
+        );
+    }
+}
+
+export async function stockOut(req, res) {
+    try {
+        const { quantity } = req.body;
+        const part = await removeStock(
+            req.params.id,
+            quantity
+        );
+        return success(
+            res,
+            200,
+            "Inventario actualizado.",
+            part
+        );
+    } catch (err) {
+        return error(
+            res,
+            400,
+            err.message
+        );
     }
 }

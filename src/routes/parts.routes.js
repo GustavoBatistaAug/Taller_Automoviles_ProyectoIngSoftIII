@@ -9,7 +9,9 @@ import {
     getLowStock,
     createPart,
     updatePart,
-    deletePart
+    deletePart,
+    stockIn,
+    stockOut
 } from "../controllers/parts.controller.js";
 
 import { authenticate } from "../middlewares/auth.middleware.js";
@@ -38,7 +40,7 @@ router.get(
 router.get(
     "/low-stock",
     authenticate,
-    authorize("ADMIN", "EMPLOYEE"),
+    authorize("ADMIN", "MECHANIC"),
     getLowStock
 );
 
@@ -63,7 +65,7 @@ router.get(
 router.post(
     "/",
     authenticate,
-    authorize("ADMIN", "EMPLOYEE"),
+    authorize("ADMIN", "MECHANIC"),
     validate(createPartSchema),
     createPart
 );
@@ -71,7 +73,7 @@ router.post(
 router.put(
     "/:id",
     authenticate,
-    authorize("ADMIN", "EMPLOYEE"),
+    authorize("ADMIN", "MECHANIC"),
     validate(updatePartSchema),
     updatePart
 );
@@ -81,6 +83,20 @@ router.delete(
     authenticate,
     authorize("ADMIN"),
     deletePart
+);
+
+router.patch(
+    "/:id/stock-in",
+    authenticate,
+    authorize("ADMIN", "MECHANIC"),
+    stockIn
+);
+
+router.patch(
+    "/:id/stock-out",
+    authenticate,
+    authorize("ADMIN", "MECHANIC"),
+    stockOut
 );
 
 export default router;

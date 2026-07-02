@@ -59,3 +59,15 @@ export async function deletePart(id) {
         { isActive: false }, { new: true }
     );
 }
+
+export async function increaseStock(id, quantity) {
+    return await Part.findByIdAndUpdate(
+        id, { $inc: { stock: quantity }}, { new: true }
+    );
+}
+
+export async function decreaseStock(id, quantity) {
+    return await Part.findByIdAndUpdate(
+        id, { $inc: { stock: -quantity } }, { new: true }
+    );
+}

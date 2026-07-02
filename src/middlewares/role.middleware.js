@@ -9,12 +9,11 @@ export function authorize(...roles) {
                 "Usuario no autenticado."
             );
         }
-
         if (!roles.includes(req.user.role)) {
             return error(
                 res,
                 403,
-                "No tiene permisos para acceder a este recurso."
+                "No tiene permisos para acceder a este recurso.",
             );
         }
         next();
