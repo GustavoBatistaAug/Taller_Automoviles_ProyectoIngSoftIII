@@ -58,7 +58,7 @@ const workOrderSchema = new mongoose.Schema(
 
         vehicleId: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "Vehicles",
+            ref: "Vehicle",
             required: true
         },
 

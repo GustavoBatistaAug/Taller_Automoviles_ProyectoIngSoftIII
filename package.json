@@ -36,5 +36,14 @@
   },
   "devDependencies": {
     "nodemon": "^3.1.14"
+  },
+  "cspell": {
+    "version": "0.2",
+    "ignorePaths": [],
+    "dictionaryDefinitions": [],
+    "dictionaries": [],
+    "words": [],
+    "ignoreWords": [],
+    "import": []
   }
 }
