@@ -38,19 +38,34 @@ const vehicleSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+
     transmission: {
         type: String,
-        enum: ["MANUAL", "AUTOMÁTICO", "CVT"]
+        enum: ["MANUAL", "AUTOMATIC"],
+        default: "MANUAL"
     },
+
     fuelType: {
         type: String,
-        enum: ["GASOLINA", "DIESEL", "HÍBRIDO", "ELÉCTRICO"]
+        enum: [
+            "GASOLINE",
+            "DIESEL",
+            "HYBRID",
+            "ELECTRIC"
+        ],
+        default: "GASOLINE"
     },
-    color: String,
+
+    color: {
+        type: String,
+        required: true
+    },
+
     isActive: {
         type: Boolean,
         default: true
     }
+
 }, {
     timestamps: true
 });

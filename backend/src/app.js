@@ -14,6 +14,7 @@ import authRoutes from "./routes/auth.routes.js";
 import vehicleRoutes from "./routes/vehicle.routes.js";
 import partsRoutes from "./routes/parts.routes.js";
 import workOrderRoutes from "./routes/workOrder.routes.js";
+import usersRoutes from "./routes/users.routes.js";
 
 const app = express();
 
@@ -67,6 +68,7 @@ app.get("/api/v1", (req, res) => {
 });
 
 app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/users", usersRoutes);
 app.use("/api/v1/service-request", serviceRoutes);
 app.use("/api/v1/vehicles", vehicleRoutes);
 app.use("/api/v1/parts", partsRoutes);

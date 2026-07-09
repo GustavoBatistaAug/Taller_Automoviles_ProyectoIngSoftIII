@@ -1,14 +1,15 @@
-export function success(res, status, message, data){
+export function success(res, status, message, data) {
     return res.status(status).json({
-        success:true,
+        success: true,
         message,
         data
     });
 }
 
-export function error(res,status,message){
+export function error(res, status, message, errors = null) {
     return res.status(status).json({
-        success:false,
-        message
+        success: false,
+        message,
+        ...(errors && { errors })
     });
 }

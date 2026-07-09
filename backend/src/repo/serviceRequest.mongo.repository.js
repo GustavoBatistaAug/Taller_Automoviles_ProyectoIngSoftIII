@@ -1,27 +1,51 @@
 import ServiceRequest from "../models/serviceRequest.model.js";
 
 export async function getAllServices() {
-    return await ServiceRequest.find();
+    return await ServiceRequest.find()
+        .populate(
+            "clientId",
+            "firstName lastName"
+        )
+        .populate(
+            "vehicleId",
+            "plate brand model"
+        );
 }
 
 export async function getServiceById(id) {
-    return await ServiceRequest.findById(id);
+    return await ServiceRequest.findById(id)
+        .populate(
+            "clientId",
+            "firstName lastName"
+        )
+        .populate(
+            "vehicleId",
+            "plate brand model"
+        );
 }
 
 export async function getServicesByClientId(clientId) {
-    return await ServiceRequest.find({ clientId });
+    return await ServiceRequest.find({ clientId })
+        .populate("clientId", "firstName lastName")
+        .populate("vehicleId", "plate brand model");
 }
 
 export async function getServicesByVehicleId(vehicleId) {
-    return await ServiceRequest.find({ vehicleId });
+    return await ServiceRequest.find({ vehicleId })
+        .populate("clientId", "firstName lastName")
+        .populate("vehicleId", "plate brand model");
 }
 
 export async function getServicesByType(type) {
-    return await ServiceRequest.find({ type });
+    return await ServiceRequest.find({ type })
+        .populate("clientId", "firstName lastName")
+        .populate("vehicleId", "plate brand model");
 }
 
 export async function getServicesByStatus(status) {
-    return await ServiceRequest.find({ status });
+    return await ServiceRequest.find({ status })
+        .populate("clientId", "firstName lastName")
+        .populate("vehicleId", "plate brand model");
 }
 
 export async function createService(service) {

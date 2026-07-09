@@ -1,6 +1,12 @@
 import { validate } from "../middlewares/validation.middleware.js"
 import { Router } from "express";
-import { register, login, profile } from "../controllers/auth.controller.js";
+import {
+    register,
+    login,
+    profile,
+    updateProfile,
+    changePassword
+} from "../controllers/auth.controller.js";
 import { authenticate } from "../middlewares/auth.middleware.js";
 import { loginSchema, registerUserSchema } from "../validators/auth.validator.js";
 
@@ -103,6 +109,18 @@ router.get(
     "/profile",
     authenticate,
     profile
+);
+
+router.put(
+    "/profile",
+    authenticate,
+    updateProfile
+);
+
+router.put(
+    "/profile/change-password",
+    authenticate,
+    changePassword
 );
 
 export default router;

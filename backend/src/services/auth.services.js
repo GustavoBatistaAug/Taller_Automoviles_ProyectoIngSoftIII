@@ -1,4 +1,9 @@
-import { findUserByEmail, createUser as repositoryCreateUser, findUserById } from "../repo/auth.repository.js";
+import {
+    findUserByEmail,
+    createUser as repositoryCreateUser,
+    findUserById,
+    updateUser
+} from "../repo/auth.repository.js";
 import { hashPassword, comparePassword } from "../utils/password.js";
 import { generateToken } from "../utils/jwt.js";
 import { ROLES } from "../constants/roles.js";
@@ -76,4 +81,56 @@ export async function getProfile(userId) {
         createdAt: user.createdAt,
         updatedAt: user.updatedAt
     };
+}
+
+export async function updateUserProfile(userId, userData) {
+    const user = await findUserById(userId);
+
+    if (!user) {
+        throw new Error("Usuario no encontrado.");
+    }
+
+    const updatedUser = await updateUser(userId, {
+        firstName: userData.firstName,
+        lastName: userData.lastName,
+        phone: userData.phone
+    });
+
+    return {
+        id: updatedUser._id,
+        firstName: updatedUser.firstName,
+        lastName: updatedUser.lastName,
+        email: updatedUser.email,
+        phone: updatedUser.phone,
+        role: updatedUser.role,
+        isActive: updatedUser.isActive,
+        createdAt: updatedUser.createdAt,
+        updatedAt: updatedUser.updatedAt
+    };
+}
+
+export async function changeUserPassword(userId, passwords) {
+    const user = await findUserById(userId);
+
+    if (!user) {
+        throw new Error("Usuario no encontrado.");
+    }
+
+    // Necesitamos el usuario con su contraseña
+    const userWithPassword = await findUserByEmail(user.email);
+
+    const validPassword = await comparePassword(
+        passwords.currentPassword,
+        userWithPassword.password
+    );
+
+    if (!validPassword) {
+        throw new Error("La contraseña actual es incorrecta.");
+    }
+
+    const hashedPassword = await hashPassword(passwords.newPassword);
+
+    await updateUser(userId, {
+        password: hashedPassword
+    });
 }
