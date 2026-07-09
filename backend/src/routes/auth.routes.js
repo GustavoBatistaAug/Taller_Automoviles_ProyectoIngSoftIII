@@ -106,6 +106,21 @@ router.get(
     profile
 );
 
+/**
+ * @openapi
+ * /auth/profile:
+ *   get:
+ *     tags:
+ *       - Auth
+ *     summary: Obtener perfil de todos los usuarios (admin-only)
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Usuarios obtenidos correctamente.
+ *       401:
+ *         description: Token inválido.
+ */
 router.get(
     "/users",
     authenticate,
