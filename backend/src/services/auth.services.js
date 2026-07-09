@@ -1,4 +1,4 @@
-import { findUserByEmail, createUser as repositoryCreateUser, findUserById } from "../repo/auth.repository.js";
+import { findUserByEmail, createUser as repositoryCreateUser, findUserById, getAllUsers } from "../repo/auth.repository.js";
 import { hashPassword, comparePassword } from "../utils/password.js";
 import { generateToken } from "../utils/jwt.js";
 import { ROLES } from "../constants/roles.js";
@@ -77,3 +77,11 @@ export async function getProfile(userId) {
         updatedAt: user.updatedAt
     };
 }
+
+export async function getAllProfiles(){
+    const users = await getAllUsers();
+    if(!users){
+        throw new Error("No hay usuarios registrados.");
+    }
+    return await getAllUsers();
+};

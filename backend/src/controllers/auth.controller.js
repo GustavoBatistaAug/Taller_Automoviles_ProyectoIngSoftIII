@@ -1,4 +1,4 @@
-import { registerUser, loginUser, getProfile } from "../services/auth.services.js";
+import { registerUser, loginUser, getProfile, getAllProfiles } from "../services/auth.services.js";
 import { success, error } from "../utils/apiResponse.js";
 
 export async function register(req, res) {
@@ -56,5 +56,19 @@ export async function profile(req, res) {
             404,
             err.message
         );
+    }
+}
+
+export async function allUsers(req, res){
+    try{
+        const users = await getAllProfiles();
+        return success(
+            res,
+            200,
+            "Usuarios obtenidos correctamente.",
+            users
+        );
+    } catch (err) {
+        return error(res, 500, err.message);
     }
 }

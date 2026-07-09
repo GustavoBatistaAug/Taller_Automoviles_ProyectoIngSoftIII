@@ -5,6 +5,9 @@ import compression from "compression";
 import rateLimit from "express-rate-limit";
 import mongoSanitize from "express-mongo-sanitize";
 import hpp from "hpp";
+import swaggerUi from "swagger-ui-express";
+import { swaggerSpec } from "./docs/swagger.js";
+
 import errorMiddleware from './middlewares/error.middleware.js'
 import serviceRoutes from "./routes/serviceRequest.routes.js";
 import authRoutes from "./routes/auth.routes.js";
@@ -68,6 +71,12 @@ app.use("/api/v1/service-request", serviceRoutes);
 app.use("/api/v1/vehicles", vehicleRoutes);
 app.use("/api/v1/parts", partsRoutes);
 app.use("/api/v1/work-order", workOrderRoutes);
+
+app.use(
+    "/api-docs",
+    swaggerUi.serve,
+    swaggerUi.setup(swaggerSpec)
+);
 
 app.use(errorMiddleware);
 

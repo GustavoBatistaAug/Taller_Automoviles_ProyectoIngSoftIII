@@ -1,19 +1,23 @@
-# Taller_Automoviles_ProyectoIngSoftIII
-Prototipo de proyecto de Ingeniería de Software, un taller de automóviles con módulo de registro de servicios (reparaciones, inspecciones, etc.) y módulo de venta de piezas (tornillos, correas, etc.)
+# GARAGE SOLUTIONS
+"Taller para mantenimiento de vehículos y venta de repuestos."
 
-## Requisitos Funcionales
-- Gestión de vehículos, clientes, empleados e inventario
-- Programación de citas y entregas
-- Facturación, cobro y reportes
-- Envío de notificaciones al cliente
+## DEFINICIÓN DEL PROYECTO
+API REST de administración de operaciones principales de un taller mecánico, gestión de vehículos, solicitudes de trabajo, compra de piezas, entre otros.
 
-## Requisitos No Funcionales
-- Usabilidad
-- Seguridad (JWT, contraseñas encriptadas)
-- Escalabilidad
-- Respaldo de datos
-- Rendimiento aceptable (<1s por consulta)
+## ESTRUCTURA
+Arquitectura: Layered/Por Capas
 
-### Personas a Cargo:
+## ROLES
+- Admin
+- Mecánico(a)
+- Recepcionista
+- Cliente
+
+## DOCUMENTACIÓN
+Swagger: Uso de Swagger para documentación de endpoints en api-docs
+
+## AUTORES
 - Gustavo Batista
 - Diego Caballero
+
+### Materia: **Desarrollo de Software IX**
