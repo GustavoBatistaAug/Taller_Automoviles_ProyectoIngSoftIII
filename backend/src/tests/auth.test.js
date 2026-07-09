@@ -26,8 +26,31 @@ describe("Auth", () => {
         phone: "6121-3274",
         role: "CLIENT"
     });
-    console.log(response.status);
-    console.log(response.body);
     expect(response.status).toBe(201);
+    });
+
+    it("Debe rechazar email duplicado", async () => {
+        const response = await request(app)
+        .post("/api/v1/auth/register")
+        .send({
+            firstName: "Pedro",
+            lastName: "Sanchez",
+            email: `pejuan@test.com`,
+            password: "cliente123",
+            phone: "6121-3274",
+            role: "CLIENT"
+        })
+        expect(response.status).toBe(400);    
+    });
+    
+
+    it("Debe fallar inicio de sesión con un usuario no existente", async () => {
+        const response = await request(app)
+        .post("/api/v1/auth/login")
+        .send({
+            email: "nonexistent.user@test.com",
+            password: "NOPASS"
+        })
+        expect(response.status).toBe(401);
     });
 });

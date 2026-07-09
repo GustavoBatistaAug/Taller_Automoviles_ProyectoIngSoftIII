@@ -9,6 +9,7 @@ import {
 } from "../controllers/auth.controller.js";
 import { authenticate } from "../middlewares/auth.middleware.js";
 import { loginSchema, registerUserSchema } from "../validators/auth.validator.js";
+import { authorize as roleMiddleware } from "../middlewares/role.middleware.js";
 
 const router = Router();
 
