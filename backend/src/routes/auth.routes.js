@@ -1,8 +1,9 @@
 import { validate } from "../middlewares/validation.middleware.js"
 import { Router } from "express";
-import { register, login, profile } from "../controllers/auth.controller.js";
+import { register, login, profile, allUsers } from "../controllers/auth.controller.js";
 import { authenticate } from "../middlewares/auth.middleware.js";
 import { loginSchema, registerUserSchema } from "../validators/auth.validator.js";
+import { authorize as roleMiddleware } from "../middlewares/role.middleware.js";
 
 const router = Router();
 
@@ -104,5 +105,12 @@ router.get(
     authenticate,
     profile
 );
+
+router.get(
+    "/users",
+    authenticate,
+    roleMiddleware("ADMIN"), 
+    allUsers
+)
 
 export default router;
