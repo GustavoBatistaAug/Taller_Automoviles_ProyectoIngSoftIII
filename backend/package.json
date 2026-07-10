@@ -4,7 +4,7 @@
   "description": "Taller para mantenimiento de vehículos y venta de repuestos.",
   "main": "src/server.js",
   "scripts": {
-    "dev": "docker start mongodb && node --watch backend/src/server.js",
+    "dev": "docker start mongodb && node --watch ./src/server.js",
     "start": "node backend/src/server.js",
     "test": "vitest"
   },
