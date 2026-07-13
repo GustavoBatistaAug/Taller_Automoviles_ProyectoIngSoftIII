@@ -1,4 +1,4 @@
-import { findUserByEmail, createUser as repositoryCreateUser, findUserById, getAllUsers } from "../repo/auth.repository.js";
+import { findUserByEmail, createUser as repositoryCreateUser, findUserById, getAllUsers, repositoryUpdateUser } from "../repo/auth.repository.js";
 import { hashPassword, comparePassword } from "../utils/password.js";
 import { generateToken } from "../utils/jwt.js";
 import { ROLES } from "../constants/roles.js";
@@ -85,3 +85,7 @@ export async function getAllProfiles(){
     }
     return await getAllUsers();
 };
+
+export async function updateUser(id, updatedData){
+    return await repositoryUpdateUser(id, updatedData);
+}

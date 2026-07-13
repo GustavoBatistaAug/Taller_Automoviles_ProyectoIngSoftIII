@@ -1,4 +1,4 @@
-import { registerUser, loginUser, getProfile, getAllProfiles } from "../services/auth.services.js";
+import { registerUser, loginUser, getProfile, getAllProfiles, updateUser as serviceUpdateUser } from "../services/auth.services.js";
 import { success, error } from "../utils/apiResponse.js";
 
 export async function register(req, res) {
@@ -70,5 +70,34 @@ export async function allUsers(req, res){
         );
     } catch (err) {
         return error(res, 500, err.message);
+    }
+}
+
+export async function updateUser(req, res){
+    try {
+        const { id } = req.params;
+        const user = await serviceUpdateUser(
+            id,
+            req.body
+        );
+        if (!user) {
+            return error(
+                res,
+                404,
+                "Usuario no encontrado."
+            );
+        }
+        return success(
+            res,
+            200,
+            "Usuario actualizado correctamente.",
+            user
+        );
+    } catch (err) {
+        return error(
+            res,
+            400,
+            err.message
+        );
     }
 }

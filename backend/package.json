@@ -31,6 +31,7 @@
     "hpp": "^0.2.3",
     "jsonwebtoken": "^9.0.3",
     "mongoose": "^9.7.3",
+    "selenium-webdriver": "^4.46.0",
     "swagger-jsdoc": "^6.3.0",
     "swagger-ui-express": "^5.0.1",
     "validator": "^13.15.35",
@@ -45,8 +46,8 @@
   "cspell": {
     "version": "0.2",
     "ignorePaths": [],
-    "dictionaryDefinitions": [],
-    "dictionaries": [],
+    "dictionaryDefinitions": ["es-es"],
+    "dictionaries": ["es-es"],
     "words": [],
     "ignoreWords": [],
     "import": []

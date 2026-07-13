@@ -8,6 +8,9 @@ export default function ProfileForm({
   onSuccess,
   onCancel,
 }) {
+
+  const id = profile?.id;
+
   const [form, setForm] = useState({
     firstName: profile?.firstName || "",
     lastName: profile?.lastName || "",
@@ -34,7 +37,9 @@ export default function ProfileForm({
       setLoading(true);
       setError("");
 
-      const response = await updateProfileRequest(form);
+      console.log(id);
+      console.log(typeof id);
+      const response = await updateProfileRequest(id, form);
 
       onSuccess(response.data.message);
     } catch (err) {

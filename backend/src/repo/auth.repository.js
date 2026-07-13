@@ -32,3 +32,14 @@ export async function deleteUser(id) {
 export async function getAllUsers() {
     return await User.find().select("-password");
 }
+
+export async function repositoryUpdateUser(id, updatedData){
+    return await User.findByIdAndUpdate(
+        id,
+        updatedData,
+        {
+            new: true,
+            runValidators: true
+        }
+    );
+}
